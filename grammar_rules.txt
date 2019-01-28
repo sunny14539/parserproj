@@ -1,0 +1,72 @@
+Original Grammar Rules
+R1. <Rat18S>  ::=   <Opt Function Definitions>   %%  <Opt Declaration List>  <Statement List>
+R2. <Opt Function Definitions> ::= <Function Definitions> 	|  <Empty>
+R3. <Function Definitions>  ::= <Function> | <Function> <Function Definitions>
+R4. <Function> ::= function  <Identifier>  [ <Opt Parameter List> ]  <Opt Declaration List>  <Body>
+R5. <Opt Parameter List> ::=  <Parameter List>	| 	<Empty>
+R6. <Parameter List>  ::=  <Parameter>    | 	<Parameter> , <Parameter List>
+R7. <Parameter> ::=  <IDs > : <Qualifier>
+R8. <Qualifier> ::= int 	|	boolean    |  real
+R9. <Body>  ::=  {  < Statement List>  }
+R10. <Opt Declaration List> ::= <Declaration List>   |    <Empty>
+R11. <Declaration List>  := <Declaration> ; 	|      <Declaration> ; <Declaration List>
+R12. <Declaration> ::=   <Qualifier > <IDs>
+R13. <IDs> ::= 	<Identifier>	| <Identifier>, <IDs>
+R14. <Statement List> ::=   <Statement>   | <Statement> <Statement List>
+R15. <Statement> ::=   <Compound>  |  <Assign>  |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+R16. <Compound> ::=   {  <Statement List>  }
+R17. <Assign> ::= 	<Identifier> = <Expression> ;
+R18. <If> ::= 	if  ( <Condition>  ) <Statement>   endif	|
+                      	if  ( <Condition>  ) <Statement>   else  <Statement>  endif
+R19. <Return> ::=  return ; |  return <Expression> ;
+R20. <Print> ::=	put ( <Expression>);
+R21. <Scan> ::=	get ( <IDs> );
+R22. <While> ::=  while ( <Condition>  )  <Statement>
+R23. <Condition> ::=     <Expression>  <Relop>   <Expression>
+R24. <Relop> ::=    	==   |   ^=	|   >     |   <	|   =>	|   =<
+R25. <Expression>  ::=    <Expression> + <Term>    | <Expression>  - <Term>	|    <Term>
+R26. <Term>	::=      <Term>  *  <Factor> 	|   <Term>  /  <Factor> 	|     <Factor>
+R27. <Factor> ::=  	-  <Primary>	|	<Primary>
+R28. <Primary> ::=     <Identifier>  |  <Integer>  |   <Identifier>  ( <IDs> )   |   ( <Expression> )   |
+                                     <Real>  |   true   |  false
+R29. <Empty>   ::=
+
+Complete Grammar Rules
+R1. <Rat18S> → <Opt Function Definitions>   %%  <Opt Declaration List>  <Statement List>
+R2. <Opt Function Definitions> → <Function Definitions>  |  ε
+R3. <Function Definitions> → <Function> <Function Definitions_Prime>
+R4. <Function Definitions_Prime> → ε | <Function Definitions>
+R5. <Function> →  function  <Identifier>  [ <Opt Parameter List> ]  <Opt Declaration List>  <Body>
+R6. <Opt Parameter List> →   <Parameter List> | ε
+R7. <Parameter List> → <Parameter> <Parameter List_Prime>
+R8. <Parameter List_Prime> → ε | , <Parameter List>
+R9. .<Parameter> →  <IDs > : <Qualifier>
+R10. <Qualifier> → int  |  boolean    |  real
+R11. <Body> → {  < Statement List>  }
+R12. <Opt Declaration List> → <Declaration List>   |   ε
+R13. <Declaration List> → <Declaration> ; <Declaration List_Prime>
+R14. <Declaration List_Prime> → ε | <Declaration List>
+R15. <Declaration> →  <Qualifier > <IDs>
+R16. <IDs> → <Identifier> <IDs_Prime>
+R17. <IDs_Prime> → , <IDs> |  ε
+R18. <Statement List> → <Statement> <Statement List_Prime>
+R19. <Statement List_Prime> → ε | <Statement List>
+R20. <Statement> ::=   <Compound>  |  <Assign>  |   <If>  |  <Return>   | <Print>   |   <Scan>   |  <While>
+R21. <Compound> ::=   {  <Statement List>  }
+R22. <Assign> ::= 	<Identifier> = <Expression> ;
+R23. <If> → if (<Condition>) <Statement> <If_Prime>
+R24. <If_Prime> → endif | else <Statement> endif
+R25. <Return> → return <Return_Prime>
+R26. <Return_Prime> → ; | <Expression> ;
+R27. <Print> ::=	put ( <Expression>);
+R28. <Scan> ::=	get ( <IDs> );
+R29. <While> ::=  while ( <Condition>  )  <Statement>
+R30. <Condition> ::=     <Expression>  <Relop>   <Expression>
+R31. <Relop> ::=    	==   |   ^=	|   >     |   <	|   =>	|   =<
+R32. <Expression> → <Term> <Expression_Prime>
+R33. <Expression_Prime>→ + <Term><Expression_Prime> | - <Term><Expression_Prime>|ε
+R34. <Term> → <Factor>  <Term_Prime>
+R35. <Term_Prime> → * <Factor><Term_Prime> | / <Factor<Term_Prime> | ε
+R36. <Factor> →   	-  <Primary> | <Primary>
+R37. <Primary> →     <Identifier>  |  <Integer>  |   <Identifier>  ( <IDs> )   |   ( <Expression> )   |  <Real>  |   true   |  false   
+R38. <Empty>   ::=
